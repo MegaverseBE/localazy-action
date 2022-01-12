@@ -1,6 +1,6 @@
-# Localazy Upload docker action
+# Localazy GitHub Action
 
-Upload localizable files to the Localazy translation management platform. For detailed documentation of Localazy CLI, please [visit the documentation](https://localazy.com/docs/cli/the-basics).
+Upload translations to Localazy, publish and promote tags. 
 
 ## Inputs
 
@@ -12,35 +12,33 @@ Upload localizable files to the Localazy translation management platform. For de
 
 **Optional** The filename of the configuration file. Default: localazy.json
 
-### `key_file`
-
-**Optional** The filename of the key file.
-
 ### `read_key`
 
-**Optional** The read key for the project on Localazy. Can be defined in the config or key file but we recommend to use Github Secrets. 
+**Optional** The read key for the project on Localazy. Can be also defined in the Localazy config file.
 
 ### `write_key`
 
-**Optional** The write key for the project on Localazy. Can be defined in the config or key file but we recommend to use Github Secrets. 
+**Optional** The write key for the project on Localazy. Can be also defined in the Localazy config file.
 
-### `force`
+### `write_key`
 
-**Optional** Whether to force the upload even if the validation fails; use only if you are sure that your configuration is correct.
+**Optional** The write key for the project on Localazy. Can be also defined in the Localazy config file.
 
-### `app_version`
+### `publish`
 
-**Optional** Override/provide the app version.
+**Optional** JSON string containing a branch:tag map for tag publishing.
 
-### `groups`
+### `promote`
 
-**Optional** Define groups to be uploaded separated with a space. The default group is always uploaded. If no groups are provided, only the default one is uploaded.
+**Optional** JSON string containing a branch:[from,to] map for tag promoting.
 
 ## Example usage
 
 ```yaml
-uses: localazy/upload@v1
+uses: MegaverseBE/localazy-action@v1
 with:
   read_key: ${{ secrets.LOCALAZY_READ_KEY }}
   write_key: ${{ secrets.LOCALAZY_WRITE_KEY }}
+  publish: '{ "development": "development" }'
+  promote: '{ "master": { from: "development", to: "master" } }'
 ```

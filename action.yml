@@ -1,6 +1,6 @@
 name: 'Localazy Upload'
-description: 'Upload localizable files to the Localazy translation management platform.'
-author: 'Localazy'
+description: 'Upload translations to Localazy, publish and promote tags.'
+author: 'MegaverseBE'
 branding:
   icon: 'upload-cloud'
   color: 'blue'
@@ -14,10 +14,6 @@ inputs:
     description: 'The filename of the configuration file. Default: localazy.json'
     required: false
     default: 'localazy.json'
-  key_file:
-    description: 'The filename of the key file.'
-    required: false
-    default: ''
   read_key: 
     description: 'The read key for the project on Localazy.'
     required: false
@@ -26,17 +22,15 @@ inputs:
     description: 'The write key for the project on Localazy.'
     required: false
     default: ''
-  force: 
-    description: 'Whether to force the upload even if the validation fails; use only if you are sure that your configuration is correct.'
+  publish:
+    description: 'JSON string containing a branch:tag map for tag publishing.'
     required: false
     default: ''
-  app_version:
-    description: 'Override/provide the app version.'
+  promote:
+    description: 'JSON string containing a branch:[from,to] map for tag promoting.'
     required: false
     default: ''
-  groups:
-    description: 'Define groups to be uploaded separated with a space. The default group is always uploaded. If no groups are provided, only the default one is uploaded.'
-    
+
 runs:
   using: 'docker'
   image: 'Dockerfile'
